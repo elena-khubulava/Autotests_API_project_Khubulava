@@ -1,0 +1,25 @@
+SQL-request #1
+
+SELECT c.login,
+COUNT(o."inDelivery") AS orders_amount
+FROM "Orders" AS o
+INNER JOIN "Couriers" AS c ON c.id = o."courierId"
+WHERE o."inDelivery" = "true";
+
+
+
+
+
+SQL-request #2
+
+SELECT track,
+       cancelled,
+       finished,
+       "inDelivery",
+  CASE
+      WHEN finished = "true" THEN 2
+      WHEN cancelled = "true" THEN -1
+      WHEN "inDelivery" = "true" THEN 1
+      ELSE 0
+ END
+FROM "Orders"; 
